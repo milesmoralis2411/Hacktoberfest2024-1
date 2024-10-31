@@ -15,13 +15,20 @@ int main()
   cout << "Enter the number of element:" << endl;
   cin >> n;
 
+  if (n <= 0) {
+        cout << "Invalid number of elements. Please enter a positive number." << endl;
+        return 1; // Early exit for invalid input
+    }
+
   int arr[n];
   inputArray(arr, n);
 
-  // bubble sort
+  // Bubble sort with optimization
+    bool swapped;
   int i, j, temp;
   for (i = (n - 1); i >= 0; i--)
   {
+    swapped = false;
     for (j = 1; j <= i; j++)
     {
       if (arr[j - 1] > arr[j])
@@ -29,8 +36,11 @@ int main()
         temp = arr[j - 1];
         arr[j - 1] = arr[j];
         arr[j] = temp;
+        swapped = true;
       }
     }
+     if (!swapped)
+            break; // Array is sorted
   }
 
   // printing the sorted array
